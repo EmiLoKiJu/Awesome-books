@@ -32,3 +32,11 @@ function storageAvailable(type) {
   } else {
     console.log('Not local storage for us');
   }
+
+  function setInStorage() {
+    localStorage.setItem("Number fifty five", 55);
+  }
+
+  function seeInStorage() {
+    console.log(localStorage.getItem('fifty five'));
+  }
