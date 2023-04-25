@@ -31,28 +31,27 @@ function storageAvailable(type) {
 }
 
 if (storageAvailable('localStorage')) {
-  isStorage = true
+  isStorage = true;
 }
 
 // Books functionalities
 
-const bookscontainer = document.querySelector('.bookscontainer')
+const bookscontainer = document.querySelector('.bookscontainer');
 const addbook = document.querySelector('.addbutton');
 const book = {
-  'title': '',
-  'author': '',
+  title: '',
+  author: '',
 };
-let collection = [];
-let strcoll = [];
+const collection = [];
 
 function appendNewBook(book) {
   collection.push(book);
   localStorage.setItem('bookcollection', JSON.stringify(collection));
   const div1 = document.createElement('div');
-  let content = `<p>${book.title}</p><p>${book.author}</p><button class="removebutton">Remove</button><hr size="1">`;
+  const content = `<p>${book.title}</p><p>${book.author}</p><button class="removebutton">Remove</button><hr size="1">`;
   div1.innerHTML = content;
   bookscontainer.appendChild(div1);
-  removebutton = div1.querySelector('.removebutton');
+  const removebutton = div1.querySelector('.removebutton');
   removebutton.addEventListener('click', () => {
     const index = collection.indexOf(book);
     collection.splice(index, 1);
@@ -69,12 +68,10 @@ addbook.addEventListener('click', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  let booksstoraged = JSON.parse(localStorage.getItem('bookcollection'));
+  const booksstoraged = JSON.parse(localStorage.getItem('bookcollection'));
   if (isStorage && booksstoraged != null) {
     for (let i = 0; i < booksstoraged.length; i++) {
       appendNewBook(booksstoraged[i]);
     }
-  } else  {
-    console.log('empty');
   }
 });
