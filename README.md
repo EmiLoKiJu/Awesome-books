@@ -71,8 +71,6 @@ In order to run this project you need:
 A browser with HMTL5 and CSS3
 Install Google Chrome or any browser that supports the above.
 
-
-
 ### Setup
 
 You don't need to setup this project
@@ -139,8 +137,6 @@ If you like this project, contact me for any business project.
 <!-- ACKNOWLEDGEMENTS -->
 
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
-
-Credits to Cindy Shin, the author of the [Original Design](https://www.behance.net/gallery/29845175/CC-Global-Summit-2015)
 
 I would like to thank microverse.org for giving me this oportunity.
 
