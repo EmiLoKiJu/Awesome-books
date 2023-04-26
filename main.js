@@ -38,30 +38,46 @@ if (storageAvailable('localStorage')) {
 
 const bookscontainer = document.querySelector('.bookscontainer');
 const addbook = document.querySelector('.addbutton');
-const book = {
-  title: '',
-  author: '',
-};
-const collection = [];
+class Book {
+  constructor(title, author) {
+    this.title = title;
+    this.author = author;
+  }
+}
+
+class Bookcollection {
+  constructor() {
+    this.collection = [];
+  }
+
+  addBook(book) {
+    this.collection.push(book);
+  }
+
+  removeBook(book) {
+    const index = this.collection.indexOf(book);
+    this.collection.splice(index, 1);
+  }
+}
+const bookcollection = new Bookcollection;
 
 function appendNewBook(book) {
-  collection.push(book);
-  localStorage.setItem('bookcollection', JSON.stringify(collection));
+  bookcollection.addBook(book);
+  localStorage.setItem('bookcollection', JSON.stringify(bookcollection));
   const div1 = document.createElement('div');
   const content = `<p>${book.title}</p><p>${book.author}</p><button class="removebutton">Remove</button><hr size="1">`;
   div1.innerHTML = content;
   bookscontainer.appendChild(div1);
   const removebutton = div1.querySelector('.removebutton');
   removebutton.addEventListener('click', () => {
-    const index = collection.indexOf(book);
-    collection.splice(index, 1);
-    localStorage.setItem('bookcollection', JSON.stringify(collection));
+    bookcollection.removeBook(book);
+    localStorage.setItem('bookcollection', JSON.stringify(bookcollection));
     div1.remove();
   });
 }
 
 addbook.addEventListener('click', () => {
-  const newbook = Object.create(book);
+  const newbook = new Book;
   newbook.title = document.querySelector('#title').value;
   newbook.author = document.querySelector('#author').value;
   appendNewBook(newbook);
@@ -70,8 +86,8 @@ addbook.addEventListener('click', () => {
 document.addEventListener('DOMContentLoaded', () => {
   const booksstoraged = JSON.parse(localStorage.getItem('bookcollection'));
   if (isStorage && booksstoraged != null) {
-    for (let i = 0; i < booksstoraged.length; i++) {
-      appendNewBook(booksstoraged[i]);
+    for (let i = 0; i < booksstoraged.collection.length; i++) {
+      appendNewBook(booksstoraged.collection[i]);
     }
   }
 });
