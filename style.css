@@ -19,12 +19,12 @@ header ul {
   margin: 0;
 }
 
-header li:hover {
-  color: rgb(196, 196, 196);
-}
-
 li {
   padding: 0 6px;
+}
+
+header li:hover {
+  color: rgb(196, 196, 196);
 }
 
 p {

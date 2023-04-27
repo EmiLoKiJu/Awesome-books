@@ -60,7 +60,7 @@ class Bookcollection {
     this.collection.splice(index, 1);
   }
 }
-const bookcollection = new Bookcollection;
+const bookcollection = new Bookcollection();
 
 function appendNewBook(book) {
   bookcollection.addBook(book);
@@ -81,7 +81,7 @@ function appendNewBook(book) {
 }
 
 addbook.addEventListener('click', () => {
-  const newbook = new Book;
+  const newbook = new Book();
   newbook.title = document.querySelector('#title').value;
   newbook.author = document.querySelector('#author').value;
   appendNewBook(newbook);
@@ -96,25 +96,33 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-
 // date and time
 
-const datetime = document.querySelector(".dateandtime");
+const datetime = document.querySelector('.dateandtime');
 
 function updateTime() {
   const date = new Date();
-  const options = {month: 'long' , year: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
-  const formattedDate = date.toLocaleDateString('en-US', options).replace(' at', ',');;
+  const options = { 
+    month: 'long', 
+    year: 'numeric', 
+    day: 'numeric', 
+    hour: 'numeric', 
+    minute: 'numeric', 
+    second: 'numeric',
+  };
+  const formattedDate = date.toLocaleDateString('en-US', options).replace(' at', ',');
   datetime.innerHTML = formattedDate;
 }
 
 setInterval(updateTime, 1000);
 
-// navbar 
+// navbar
+const menu = document.querySelectorAll('header li');
+const section = document.querySelectorAll('.section');
 
 function menuselector(menuelement) {
-  for(let i = 0; i < menu.length; i++) {
-    if(menuelement == menu[i]) {
+  for (let i = 0; i < menu.length; i++) {
+    if (menuelement === menu[i]) {
       if (!menu[i].classList.contains('activewindow')) menu[i].classList.add('activewindow');
       if (section[i].classList.contains('dnone')) section[i].classList.remove('dnone');
     } else {
@@ -124,9 +132,7 @@ function menuselector(menuelement) {
   }
 }
 
-const menu = document.querySelectorAll('header li');
-const section = document.querySelectorAll('.section');
-for(let i = 0; i < menu.length; i++) {
+for (let i = 0; i < menu.length; i++) {
   menu[i].addEventListener('click', () => {
     menuselector(menu[i]);
   });
