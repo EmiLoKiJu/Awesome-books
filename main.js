@@ -102,12 +102,12 @@ const datetime = document.querySelector('.dateandtime');
 
 function updateTime() {
   const date = new Date();
-  const options = { 
-    month: 'long', 
-    year: 'numeric', 
-    day: 'numeric', 
-    hour: 'numeric', 
-    minute: 'numeric', 
+  const options = {
+    month: 'long',
+    year: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
     second: 'numeric',
   };
   const formattedDate = date.toLocaleDateString('en-US', options).replace(' at', ',');
