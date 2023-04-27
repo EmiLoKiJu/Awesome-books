@@ -23,10 +23,6 @@ header li:hover {
   color: rgb(196, 196, 196);
 }
 
-.activewindow {
-  color: rgb(133, 133, 133);
-}
-
 li {
   padding: 0 6px;
 }
@@ -49,6 +45,14 @@ p {
 
 .dnone {
   display: none;
+}
+
+.textstart {
+  text-align: start;
+}
+
+.activewindow {
+  color: rgb(133, 133, 133);
 }
 
 .listbutton {
@@ -81,5 +85,4 @@ p {
 
 .contact {
   margin: 16px 20%;
-  text-align: start;
 }
