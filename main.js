@@ -1,5 +1,3 @@
-/* eslint-disable no-plusplus */
-
 // Checking if local storage is available
 
 let isStorage = false;
@@ -42,20 +40,37 @@ const book = {
   title: '',
   author: '',
 };
-const collection = [];
+
+class Bookcollection {
+  constructor() {
+    this.collection = [];
+  }
+
+  addBook(book) {
+    this.collection.push(book);
+  }
+
+  removeBook(book) {
+    const index = this.collection.indexOf(book);
+    this.collection.splice(index, 1);
+  }
+}
+const bookcollection = new Bookcollection();
 
 function appendNewBook(book) {
-  collection.push(book);
-  localStorage.setItem('bookcollection', JSON.stringify(collection));
+  bookcollection.addBook(book);
+  localStorage.setItem('bookcollection', JSON.stringify(bookcollection));
   const div1 = document.createElement('div');
-  const content = `<p>${book.title}</p><p>${book.author}</p><button class="removebutton">Remove</button><hr size="1">`;
+  div1.classList.add('dflex');
+  div1.classList.add('spacebetween');
+  if (bookcollection.collection.indexOf(book) % 2 !== 0) div1.classList.add('grey');
+  const content = `<p>"${book.title}" by ${book.author}</p><button class="removebutton">Remove</button>`;
   div1.innerHTML = content;
   bookscontainer.appendChild(div1);
   const removebutton = div1.querySelector('.removebutton');
   removebutton.addEventListener('click', () => {
-    const index = collection.indexOf(book);
-    collection.splice(index, 1);
-    localStorage.setItem('bookcollection', JSON.stringify(collection));
+    bookcollection.removeBook(book);
+    localStorage.setItem('bookcollection', JSON.stringify(bookcollection));
     div1.remove();
   });
 }
@@ -70,8 +85,50 @@ addbook.addEventListener('click', () => {
 document.addEventListener('DOMContentLoaded', () => {
   const booksstoraged = JSON.parse(localStorage.getItem('bookcollection'));
   if (isStorage && booksstoraged != null) {
-    for (let i = 0; i < booksstoraged.length; i++) {
-      appendNewBook(booksstoraged[i]);
+    for (let i = 0; i < booksstoraged.collection.length; i += 1) {
+      appendNewBook(booksstoraged.collection[i]);
     }
   }
 });
+
+// date and time
+
+const datetime = document.querySelector('.dateandtime');
+
+function updateTime() {
+  const date = new Date();
+  const options = {
+    month: 'long',
+    year: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+  };
+  const formattedDate = date.toLocaleDateString('en-US', options).replace(' at', ',');
+  datetime.innerHTML = formattedDate;
+}
+
+setInterval(updateTime, 1000);
+
+// navbar
+const menu = document.querySelectorAll('header li');
+const section = document.querySelectorAll('.section');
+
+function menuselector(menuelement) {
+  for (let i = 0; i < menu.length; i += 1) {
+    if (menuelement === menu[i]) {
+      if (!menu[i].classList.contains('activewindow')) menu[i].classList.add('activewindow');
+      if (section[i].classList.contains('dnone')) section[i].classList.remove('dnone');
+    } else {
+      if (menu[i].classList.contains('activewindow')) menu[i].classList.remove('activewindow');
+      if (!section[i].classList.contains('dnone')) section[i].classList.add('dnone');
+    }
+  }
+}
+
+for (let i = 0; i < menu.length; i += 1) {
+  menu[i].addEventListener('click', () => {
+    menuselector(menu[i]);
+  });
+}
