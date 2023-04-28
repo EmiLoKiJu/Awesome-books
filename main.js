@@ -1,6 +1,3 @@
-/* eslint-disable no-plusplus */
-/* eslint-disable max-classes-per-file */
-
 // Checking if local storage is available
 
 let isStorage = false;
@@ -90,7 +87,7 @@ addbook.addEventListener('click', () => {
 document.addEventListener('DOMContentLoaded', () => {
   const booksstoraged = JSON.parse(localStorage.getItem('bookcollection'));
   if (isStorage && booksstoraged != null) {
-    for (let i = 0; i < booksstoraged.collection.length; i++) {
+    for (let i = 0; i < booksstoraged.collection.length; i += 1) {
       appendNewBook(booksstoraged.collection[i]);
     }
   }
@@ -121,7 +118,7 @@ const menu = document.querySelectorAll('header li');
 const section = document.querySelectorAll('.section');
 
 function menuselector(menuelement) {
-  for (let i = 0; i < menu.length; i++) {
+  for (let i = 0; i < menu.length; i += 1) {
     if (menuelement === menu[i]) {
       if (!menu[i].classList.contains('activewindow')) menu[i].classList.add('activewindow');
       if (section[i].classList.contains('dnone')) section[i].classList.remove('dnone');
@@ -132,7 +129,7 @@ function menuselector(menuelement) {
   }
 }
 
-for (let i = 0; i < menu.length; i++) {
+for (let i = 0; i < menu.length; i += 1) {
   menu[i].addEventListener('click', () => {
     menuselector(menu[i]);
   });
