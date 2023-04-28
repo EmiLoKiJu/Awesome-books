@@ -36,12 +36,10 @@ if (storageAvailable('localStorage')) {
 
 const bookscontainer = document.querySelector('.bookscontainer');
 const addbook = document.querySelector('.addbutton');
-class Book {
-  constructor(title, author) {
-    this.title = title;
-    this.author = author;
-  }
-}
+const book = {
+  title: '',
+  author: '',
+};
 
 class Bookcollection {
   constructor() {
@@ -78,7 +76,7 @@ function appendNewBook(book) {
 }
 
 addbook.addEventListener('click', () => {
-  const newbook = new Book();
+  const newbook = Object.create(book);
   newbook.title = document.querySelector('#title').value;
   newbook.author = document.querySelector('#author').value;
   appendNewBook(newbook);
